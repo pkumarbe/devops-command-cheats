@@ -1,1 +1,9 @@
+Api config path =
+  #ls /etc/rancher/rke2/
+  config.yaml  registries.yaml  rke2-pss.yaml  rke2.yaml  tls
+   # ls /etc/rancher/rke2/tls/
+  ca.crt  tls.crt  tls.key
+Static manifests =
+  # ls /var/lib/rancher/rke2/server/manifests/
+rke2-cilium.yaml  rke2-coredns.yaml  rke2-ingress-nginx.yaml  rke2-metrics-server.yaml  rke2-snapshot-controller-crd.yaml  rke2-snapshot-controller.yaml  rke2-snapshot-validation-webhook.yaml
 
