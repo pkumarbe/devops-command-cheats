@@ -17,3 +17,27 @@ Import and zst image :-
 
 echo '/var/lib/rancher/rke2/bin/ctr --address  /run/k3s/containerd/containerd.sock "$@"' > /usr/bin/ctr
 chmod +x /usr/bin/ctr
+
+
+ISO  CleanUP - 
+
+k exec -it metal3-metal3-ironic-xx-xx sh  -n metal3-system
+
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+Defaulted container "ironic-httpd" out of: ironic-httpd, ironic-inspector, ironic-log-watch, ironic, ironic-ipa-downloader (init)
+
+sh-4.4$
+sh-4.4$ cd /shared/html/redfish
+
+ls -ltr
+total 2979772
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Jan 21 09:09 boot-1960fd05-f8ed-4d29-bad3-77a380aabfca.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Jan 23 12:50 boot-7ecbf9f3-2eed-4fc8-994f-0621bcf6099f.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Feb 12 09:39 boot-06cfca8a-cf23-42c7-a351-5dd8fc75ef97.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Mar  6 13:41 boot-89c0bde9-70d6-4e96-a972-010989af6975.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Mar 10 05:15 boot-04bffee9-ff57-45f5-a4f2-592e6eefc801.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435894272 Mar 12 12:07 boot-cd6a8ac6-5479-4292-93b9-0bfe6e1cfc6a.iso
+-rw-rw-r--. 1 ironic-suse ironic-suse 435896320 Apr 10 05:49 boot-f8c5e980-2e86-4dd6-9e5e-65c1d4d57b19.iso
+
+
+Clran up those
