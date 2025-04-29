@@ -13,3 +13,7 @@ Import an image :-
 Import and zst image :-
   zstd -drke2-images.linux-amd64.tar.zst -o rke2-images.linux-amd64.tar
   ctr -a /run/k3s/containerd/containerd.sock -n k8s.io image import rke2-images.linux-amd64.tar
+#Make ctr with run3 socket by default for root user  (from sudo)
+
+echo '/var/lib/rancher/rke2/bin/ctr --address  /run/k3s/containerd/containerd.sock "$@"' > /usr/bin/ctr
+chmod +x /usr/bin/ctr
