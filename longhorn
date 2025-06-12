@@ -2,6 +2,8 @@ loghorn replica scehdule issue even though disk space available -
 
 Note - In single node cluster even though replica count sets to 3, it will not create replicas on same node.
 
+source: - https://docs.harvesterhci.io/v1.4/advanced/singlenodeclusters/?utm_source=chatgpt.com 
+
 https://www.suse.com/support/kb/doc/?id=000021268 
 
 There are 2 conditions that must be met to schedule a replica to a disk successfully:
