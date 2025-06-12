@@ -1,6 +1,6 @@
 loghorn replica scehdule issue even though disk space available - 
 
-Note - In single node cluster even though replica count sets to 3, it will not create replicas on same node.
+Note - In single node cluster even though replica count sets to 3, it will not create replicas on same node. It is expected volumes are marked as Degraded on the Volumes screen of the Harvester UI.
 
 source: - https://docs.harvesterhci.io/v1.4/advanced/singlenodeclusters/?utm_source=chatgpt.com 
 
