@@ -1,8 +1,10 @@
 loghorn replica scehdule issue even though disk space available - 
 
+Note - In single node cluster even though replica count sets to 3, it will not create replicas on same node.
+
 https://www.suse.com/support/kb/doc/?id=000021268 
 
-There are 2 conditions that must be met to successfully schedule a replica to a disk:
+There are 2 conditions that must be met to schedule a replica to a disk successfully:
   The actual space usage condition: (Storage Available - Actual Size) > (Storage Maximum * Minimal Available Percentage)/100)
   The scheduling space condition: (Size + Storage Scheduled) <= ((Storage Maximum - Storage Reserved)* Over Provisioning Percentage / 100)
 
@@ -16,7 +18,29 @@ Example:
   
   Allocated Size = 10Gi
   Actual Size = ~2Gi (plus metadata and snapshot overhead)
+1. 
+  Storage Available - ( storage max - ( storage reserved + storage scheduled))
+  Actual Size - Acutual data written
+  Minimal Available Percentage - 25% by default
+  Storage Maximum - is size of disk on server
+ 
+2.
+  size -  provisioned capacity of the volume, maximum size the volume can grow to. volume’s spec when we create it (e.g., 10Gi, 50Gi, etc.).
+  Storage Scheduled - sum of the sizes of all volume. ( if 3 volume with 10G each then the storage scheduled will be 30G) 
+  Storage Reserved - Storage Max * (100 - Minimal Available Percentage)% [ if storage max is 100G and minimal availabe percentage is 25%, then storage reserved will be 75G)
+  Over Provisioning Percentage
+Example :- 
+Storage Available - 85.84
+Actual Size - 416M
+Storage Maximum - 150G
+Minimal Available Percentage - 25G
+Size - 5G
+Storage Scheduled - 19G
+Storage Reserved - 45G
+Over Provisioning Percentage - 100%
 
-Storage Available - ( storage max - ( storage reserved + storage scheduled))
-Actual Size - Acutual data written
-Storage Maximum - is size of disk on server
+Storage Available−Actual Size>Minimal Available Threshold
+ 
+85.84 − 0.416 > 37.5
+
+
