@@ -1,1 +1,22 @@
+loghorn replica scehdule issue even though disk space available - 
 
+https://www.suse.com/support/kb/doc/?id=000021268 
+
+There are 2 conditions that must be met to successfully schedule a replica to a disk:
+  The actual space usage condition: (Storage Available - Actual Size) > (Storage Maximum * Minimal Available Percentage)/100)
+  The scheduling space condition: (Size + Storage Scheduled) <= ((Storage Maximum - Storage Reserved)* Over Provisioning Percentage / 100)
+
+
+Storage Minimal Available Percentage:- The default value for Storage Minimal Available Percentage in Longhorn is typically 25%. ( if 100G disk, then 75G will be allocated)
+  Actual Size of a volume refers to the real disk space currently used by that volume on the underlying storage. 
+  This is different from the Allocated Size or Requested Size, which is the total capacity the volume can grow to.
+
+Example:
+  If we create a 10Gi volume but only write 2Gi of data to it:
+  
+  Allocated Size = 10Gi
+  Actual Size = ~2Gi (plus metadata and snapshot overhead)
+
+Storage Available - ( storage max - ( storage reserved + storage scheduled))
+Actual Size - Acutual data written
+Storage Maximum - is size of disk on server
