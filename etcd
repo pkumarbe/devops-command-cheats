@@ -1,1 +1,22 @@
+In eksA sometime we see multiple etcd container runs and it creates problem to kubelet and cluster not forms.
+I see manually we need delete those etcd. Before that it is good to stop kubelet
 
+# systemctl stop kubelet
+
+#ctr -n k8s.io container ls | grep etcd
+0b02faa46bc6cd6d726b300c519cd686389c51dcbc520b8a38498ec5f3d43e06    public.ecr.aws/eks-distro/etcd-io/etcd:v3.5.8-eks-1-27-10                                                                          io.containerd.runc.v2
+7cea9b90208824c20d3933c7b4cc8e812ca4e5afc56280be8275883d5c4653c8    public.ecr.aws/eks-anywhere/aws/etcdadm-bootstrap-provider:v1.0.9-eks-a-47                                                         io.containerd.runc.v2
+b56dddbe02fe0663830c9fd376e34ae0df6ef6c3f7e227946f6bdbf6fadf3b5e    public.ecr.aws/eks-anywhere/aws/etcdadm-controller:v1.0.14-eks-a-47                                                                io.containerd.runc.v2
+cc851c3d26d4c86dcd603cfad0e622526df91eb1c60e5ca524e6b1aca9b74628    public.ecr.aws/eks-distro/etcd-io/etcd:v3.5.8-eks-1-27-10           
+ 
+# ctr -n k8s.io container rm 0b02faa46bc6cd6d726b300c519cd686389c51dcbc520b8a38498ec5f3d43e06
+  => Above deleted as it is not in use. But second one (below container) failed to delete it is a running container.
+# ctr -n k8s.io container rm cc851c3d26d4c86dcd603cfad0e622526df91eb1c60e5ca524e6b1aca9b74628
+ERRO[0000] failed to delete container "cc851c3d26d4c86dcd603cfad0e622526df91eb1c60e5ca524e6b1aca9b74628"  error="cannot delete a non stopped container: {running 0 0001-01-01 00:00:00 +0000 UTC}"
+ctr: cannot delete a non stopped container: {running 0 0001-01-01 00:00:00 +0000 UTC}
+
+# To delete a running continaer we need to kill the task as below
+# ctr -n k8s.io task kill cc851c3d26d4c86dcd603cfad0e622526df91eb1c60e5ca524e6b1aca9b74628
+# ctr -n k8s.io container rm cc851c3d26d4c86dcd603cfad0e622526df91eb1c60e5ca524e6b1aca9b74628 
+ * now the container will be deleted.
+Next start/restart the kubelet.
