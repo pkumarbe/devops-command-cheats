@@ -1,1 +1,6 @@
 
+set vi as git's default editor
+=> git config --global core.editor "vi"
+To verify 
+=> git config --global --get core.editor
+
