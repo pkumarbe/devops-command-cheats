@@ -10,3 +10,29 @@
 | **engine-image**             | DaemonSet       | Ensures Longhorn engine binaries are available on nodes  |
 | **longhorn-driver-deployer** | Deployment      | Deploys and manages CSI components                       |
 | **longhorn-ui**              | Deployment      | Web UI for Longhorn management                           |
+
+One-Line Mental Model
+
+CSI pods talk to Kubernetes
+Longhorn manager controls storage logic
+Instance & engine pods run actual volume processes
+CSI plugin mounts volumes on nodes
+UI is only for visibility
+
+Which Pods Are Critical?
+
+🚨 Cluster won’t work if these fail:
+
+longhorn-manager
+
+instance-manager
+
+longhorn-csi-plugin
+
+⚠️ Controllers can restart safely:
+
+csi-*
+
+longhorn-ui
+
+driver-deployer
