@@ -1,0 +1,12 @@
+| **Pod Type**                 | **Runs As**     | **Purpose / Use**                                        |
+| ---------------------------- | --------------- | -------------------------------------------------------- |
+| **csi-attacher**             | Deployment (HA) | Attaches and detaches Longhorn volumes to nodes          |
+| **csi-provisioner**          | Deployment (HA) | Creates volumes when a PVC is created                    |
+| **csi-resizer**              | Deployment (HA) | Expands volume size when PVC is resized                  |
+| **csi-snapshotter**          | Deployment (HA) | Manages volume snapshots and restores                    |
+| **longhorn-csi-plugin**      | DaemonSet       | Mounts/unmounts volumes on each worker node              |
+| **longhorn-manager**         | DaemonSet       | Core controller: manages nodes, disks, replicas, volumes |
+| **instance-manager**         | Per-node pod    | Runs volume engines and replica processes                |
+| **engine-image**             | DaemonSet       | Ensures Longhorn engine binaries are available on nodes  |
+| **longhorn-driver-deployer** | Deployment      | Deploys and manages CSI components                       |
+| **longhorn-ui**              | Deployment      | Web UI for Longhorn management                           |
